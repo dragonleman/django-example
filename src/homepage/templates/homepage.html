@@ -2,196 +2,103 @@
 <html>
 <head>
   <title>Election CCE</title>
+  {% load bootstrap5 %}
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
 </head>
 <body>
-  <h1>{{ user.username }}</h1>
-  {% if user.is_authenticated %}
-    <a href="{% url 'logout' %}">Logout</a>
-  {% else %}
-    <a href="{% url 'login_view' %}">Login</a>
-  {% endif %}
+  <div class="container">
 
-  <h1>Election of the members of the Conférence du Corps Enseignants</h1>
-  <p>This is a paragraph.</p>
-
-  <form action="" method="get" id="election_cce">
-    <legend>Choose at most 20 candidates.</legend>
-
-    <div>
-      <input type="checkbox" id="cevher" name="cevher">
-      <label for="cevher">
-        <a target="_blank" href="https://people.epfl.ch/199128">Volkan Cevher</a>
-      </label>
-    </div>
-
-    <div>
-      <input type="checkbox" id="osterwalder" name="osterwalder">
-      <label for="osterwalder">
-        <a target="_blank" href="https://people.epfl.ch/116115">Andreas Osterwalder</a>
-      </label>
-    </div>
-
-    <div>
-      <input type="checkbox" id="haug" name="haug">
-      <label for="haug">
-        <a target="_blank" href="https://people.epfl.ch/190209">Franz-Josef Haug</a>
-      </label>
+    <div class="row justify-content-md-center">
+      <div class="col">
+      </div>
+      <div class="col-8">
+        <h1>{{ user.username }}</h1>
+      </div>
+      <div class="col">
+      </div>
     </div>
     
-    <div>
-      <input type="checkbox" id="gruetter" name="gruetter">
-      <label for="gruetter">
-        <a target="_blank" href="https://people.epfl.ch/161735">Rolf Gruetter</a>
-      </label>
-    </div>
-    
-    <div>
-      <input type="checkbox" id="agrawal" name="agrawal">
-      <label for="agrawal">
-        <a target="_blank" href="https://people.epfl.ch/263766">Kumar Varoon Agrawal</a>
-      </label>
-    </div>
-
-    <div>
-      <input type="checkbox" id="cantoni" name="cantoni">
-      <label for="cantoni">
-        <a target="_blank" href="https://people.epfl.ch/120862">Marco Cantoni</a>
-      </label>
+    <div class="row justify-content-md-center">
+      <div class="col">
+      </div>
+     
+      <div class="col-8">
+        {% if user.is_authenticated and user.is_superuser %}
+        <a href="{% url 'create_election' %}">Create an Election</a>
+        {% endif %}
+      </div>
+      <div class="col">
+        {% if user.is_authenticated %}
+        <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+        <a href="{% url 'login_view' %}">Login</a>
+        {% endif %}
+      </div>
     </div>
 
-    <div>
-      <input type="checkbox" id="dubuis" name="dubuis">
-      <label for="dubuis">
-        <a target="_blank" href="https://people.epfl.ch/183833">Samuel Dubuis</a>
-      </label>
-    </div>
+    <div class="row justify-content-md-center">
+      <div class="col">
+      </div>
 
-    <div>
-      <input type="checkbox" id="prenleloup" name="prenleloup">
-      <label for="prenleloup">
-        <a target="_blank" href="https://people.epfl.ch/111563">Alain Prenleloup</a>
-      </label>
-    </div>
-    
-    <div>
-      <input type="checkbox" id="tang" name="tang">
-      <label for="tang">
-        <a target="_blank" href="https://people.epfl.ch/270859">Li Tang</a>
-      </label>
-    </div>
-    
-    <div>
-      <input type="checkbox" id="burdet" name="burdet">
-      <label for="burdet">
-        <a target="_blank" href="https://people.epfl.ch/104671">Olivier Burdet</a>
-      </label>
-    </div>
-    <div>
-      <input type="checkbox" id="pouchon" name="pouchon">
-      <label for="pouchon">
-        <a target="_blank" href="https://people.epfl.ch/178578">Orane Pouchon</a>
-      </label>
-    </div>
+      <div class="col-8">
+      {% if display_election %}
+        
+        {% if election %}
+        <h1>{{ election.title }}</h1>
+        <p>{{ election.subtitle }}</p>
 
-    <div>
-      <input type="checkbox" id="ripolles" name="ripolles">
-      <label for="ripolles">
-        <a target="_blank" href="https://people.epfl.ch/234442">Anna Carratala Ripolles</a>
-      </label>
-    </div>
+        <form action="" method="get" id="election_cce">
+          <legend>Choose at most {{ election.maxchoices }} candidates.</legend>
 
-    <div>
-      <input type="checkbox" id="munoz" name="munoz">
-      <label for="munoz">
-        <a target="_blank" href="https://people.epfl.ch/172629">Anna Neus Igual Muñoz</a>
-      </label>
-    </div>
-    
-    <div>
-      <input type="checkbox" id="anciaux" name="anciaux">
-      <label for="anciaux">
-        <a target="_blank" href="https://people.epfl.ch/182721">Guillaume Anciaux</a>
-      </label>
-    </div>
-    
-    <div>
-      <input type="checkbox" id="maitra" name="maitra">
-      <label for="maitra">
-        <a target="_blank" href="https://people.epfl.ch/182032">Gautam Maitra</a>
-      </label>
-    </div>
-    <div>
-      <input type="checkbox" id="sam" name="sam">
-      <label for="sam">
-        <a target="_blank" href="https://people.epfl.ch/106336">Jamila Sam</a>
-      </label>
-    </div>
+          {% for candidate in election.candidates %}
+          <div class="input-group mb-3">
+            <div class="input-group-text">
+              <input type="checkbox" id="{{ candidate.username }}" name="{{ candidate.username }}">
+            </div>
+            <label for="{{ candidate.username }}">
+              <a target="_blank" href="{{ candidate.link }}">{{ candidate.name }}</a>
+            </label>
+          </div>
+          {% endfor %}
 
-    <div>
-      <input type="checkbox" id="garin" name="garin">
-      <label for="garin">
-        <a target="_blank" href="https://people.epfl.ch/293509">Adélie Garin</a>
-      </label>
-    </div>
+          <div class="input-group mb-3">
+            <div class="input-group-text">
+              <input type="checkbox" id="blank_vote}" name="blank_vote">
+            </div>
+            <label for="{{ candidate.username }}">
+              Blank (if selected, only a blank vote will be recorded)</a>
+            </label>
+          </div>
+        </form>
 
-    <div>
-      <input type="checkbox" id="oveisi" name="oveisi">
-      <label for="oveisi">
-        <a target="_blank" href="https://people.epfl.ch/191661">Emad Oveisi</a>
-      </label>
-    </div>
-    
-    <div>
-      <input type="checkbox" id="koukab" name="koukab">
-      <label for="koukab">
-        <a target="_blank" href="https://people.epfl.ch/122433">Adil Koukab</a>
-      </label>
-    </div>
-    
-    <div>
-      <input type="checkbox" id="testa" name="testa">
-      <label for="testa">
-        <a target="_blank" href="https://people.epfl.ch/153200">Duccio Testa</a>
-      </label>
-    </div>
+        <button type="submit" form="election_cce" value="Submit">Submit</button>
+        {% else %}
+        <p>There is no elections</p>
+        {% endif %}
 
-    <div>
-      <input type="checkbox" id="sofia" name="sofia">
-      <label for="sofia">
-        <a target="_blank" href="https://people.epfl.ch/154702">Lionel Sofia</a>
-      </label>
-    </div>
+      {% endif %}
 
-    <div>
-      <input type="checkbox" id="joost" name="joost">
-      <label for="joost">
-        <a target="_blank" href="https://people.epfl.ch/149002">Stéphane Joost</a>
-      </label>
+      </div>
+      <div class="col">
+      </div>
     </div>
+  </div>
 
-    <div>
-      <input type="checkbox" id="moreno" name="moreno">
-      <label for="moreno">
-        <a target="_blank" href="https://people.epfl.ch/241268">Sergi Aguacil Moreno</a>
-      </label>
-    </div>
-    
-    <div>
-      <input type="checkbox" id="milosevic" name="milosevic">
-      <label for="milosevic">
-        <a target="_blank" href="https://people.epfl.ch/348024">Tamara Milosevic</a>
-      </label>
-    </div>
-    
-    <div>
-      <input type="checkbox" id="ferrari" name="ferrari">
-      <label for="ferrari">
-        <a target="_blank" href="https://people.epfl.ch/178175">Alessio Ferrari</a>
-      </label>
-    </div>
-  </form>
-
-  <button type="submit" form="election_cce" value="Submit">Submit</button>
+  <script>
+  $(document).ready(function () {
+    $("input[type='checkbox']").change(function () {
+      var maxAllowed = {{ election.maxchoices }};
+      var cnt = $("input[type='checkbox']:checked").length;
+      if (cnt > maxAllowed) 
+      {
+         $(this).prop("checked", "");
+         alert('Select maximum ' + maxAllowed + ' choices!');
+      }
+    });
+  });
+  </script> 
 
 </body>
 </html>

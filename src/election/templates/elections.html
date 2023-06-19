@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Liste des élections</title>
+</head>
+<body>
+  <h1>{{ user.username }}</h1>
+  
+  {% if user.is_authenticated and user.is_superuser %}
+  <form action="" method="get" id="election">
+    <label for="name">Title :
+      <input type="text" id="title" name="title" required size="100">
+    </label>
+    <label for="name">Max choices :
+      <input type="text" id="maxchoices" name="maxchoices" required size="5">
+    </label>
+  </form>
+  <button type="submit" form="election" value="Submit">Submit</button>
+  {% endif %}
+
+
+  <table>
+    <tr>
+      <th>Title</th>
+      <th>Candidates</th>
+      <th>Max choices</th>
+      <th>Voters</th>
+      <th>Organizer</th>
+    </tr>
+    {% for election in elections %}
+    <tr>
+      <td>{{ election.title }}</td>
+      <td>{{ election.candidates|length }}</td>
+      <td>{{ election.maxchoices }}</td>
+      <td>{{ election.voters|length }}</td>
+      <td>{{ election.contact }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+</body>
+</html>

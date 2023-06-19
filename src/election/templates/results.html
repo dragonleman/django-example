@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Résultats des élections</title>
+</head>
+<body>
+  <h1>{{ election.title }}</h1>
+
+  <h2>Résultats</h2>
+  <h3>Votes: {{ votes|length }} </h3>
+  <h3>Votes blanc: {{ blancs }} </h3>
+
+  <table>
+    <tr>
+      <th>Candidat</th>
+      <th>Votes</th>
+    </tr>
+    {% for key, value in candidates.items %}
+    <tr>
+      <td>{{ key }}</td>
+      <td>{{ value }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <h2>Votes</h2>
+  <table>
+    <tr>
+      <th>Numéro</th>
+      <th>Choix</th>
+    </tr>
+    {% for vote in votes %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ vote.choices }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+
+</body>
+</html>

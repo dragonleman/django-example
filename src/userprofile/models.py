@@ -4,7 +4,6 @@
 
 from django.contrib.auth.models import User
 from django.db import models
-from cryptography.fernet import Fernet
 
 
 class UserProfile(models.Model):
@@ -22,8 +21,6 @@ class UserProfile(models.Model):
   classe = models.CharField(max_length=100, null=True, blank=True)
   statut = models.CharField(max_length=100, null=True, blank=True)
   memberof = models.TextField(null=True, blank=True)
-  
-  enckey = Fernet.generate_key()
 
   def __str__(self):
     full_name = '%s %s' % (self.user.last_name, self.user.first_name)

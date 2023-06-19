@@ -27,6 +27,7 @@ admin.site.__class__ = TequilaAdminSite
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('homepage.urls')),
+    path('election/', include('election.urls'))
 ]
 
 urlpatterns += django_tequila_urlpatterns

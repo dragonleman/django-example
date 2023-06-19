@@ -1,0 +1,5 @@
+Banane, banane, https://fr.wikipedia.org/wiki/Banane
+Orange, orange, https://fr.wikipedia.org/wiki/Orange_(fruit)
+Pamplemousse, pamplemousse, https://fr.wikipedia.org/wiki/Pamplemousse_et_pom%C3%A9lo
+Pastèque, pasteque, https://fr.wikipedia.org/wiki/Past%C3%A8que
+Fraise, fraise, https://fr.wikipedia.org/wiki/Fraise
