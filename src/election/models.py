@@ -2,6 +2,8 @@
 (c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2023
 """
 
+import ast
+from datetime import date
 from django.db import models
 
 
@@ -13,39 +15,32 @@ class Vote(models.Model):
 
 class Election(models.Model):
   """ Election model """
-  title = models.CharField(max_length=1000)
+  title = models.CharField(max_length=200, default="")
   maxchoices = models.IntegerField(default=1)
-
-  startdate = "2023-06-19"
-  enddate = "2023-08-31"
   
-  contact = {
-    "name": "",
-    "phone": "",
-    "email": "",
-  }
+  startdate = models.CharField(max_length=50, default=date.today())
+  enddate = models.CharField(max_length=50, default=date.today())
 
-  voters = []
-  voters_file = open('/home/duratti/workspace-fsd/django-example/src/election/voters.txt', 'r')
-  voters_file_lines = voters_file.readlines()
-  for line in voters_file_lines:
-    voters.append(line.strip())
+  contact_name = models.CharField(max_length=100, default="")
+  contact_phone = models.CharField(max_length=100, default="")
+  contact_email = models.CharField(max_length=100, default="")
 
-  candidates = []
-  candidates_file = open('/home/duratti/workspace-fsd/django-example/src/election/candidates.txt', 'r')
-  candidates_file_lines = candidates_file.readlines()
-  for line in candidates_file_lines:
-    data = line.split(", ")
-    candidate = {
-      "name": data[0],
-      "username": data[1],
-      "link": data[2],
-    }
-    candidates.append(candidate)
+  voters = models.TextField(null=True, blank=True)
+  candidates = models.TextField(null=True, blank=True)
+
+
+  def get_voters(self):
+    return ast.literal_eval(self.voters)
+
 
   def get_candidates(self):
+    return ast.literal_eval(self.candidates)
+
+
+  def get_candidates_username(self):
+    candidates = self.get_candidates()
     result = []
-    for candidate in self.candidates:
+    for candidate in candidates:
       result.append(candidate['username'])
     return result
 

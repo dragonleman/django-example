@@ -1,11 +1,23 @@
-<!DOCTYPE html>
-<html>
-<body>
+{% extends 'base.html' %}
 
-<h1>You have tried to cheat your vote.</h1>
-<p>Your vote has been recorded as a BLANK vote.</p>
+{% block content %}
 
-<p>{{ user.username }}</p>
+<div class="container">
 
-</body>
-</html>
+  <div class="row justify-content-md-center">
+    <div class="col">
+    </div>
+
+    <div class="col-8">
+      <h1>You have tried to cheat your vote.</h1>
+      <p>Your vote has been recorded as a BLANK vote.</p>
+
+      <p>{{ user.username }}</p>
+    </div>
+
+    <div class="col">
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.template import loader
+from config.settings.base import BASE_DIR
 from election.models import Election, Vote
 
 
@@ -7,9 +8,30 @@ def create_election(request):
 
   if request.GET and 'title' in request.GET:
     election, created = Election.objects.get_or_create(title=request.GET['title'])
-    if created:
-      election.maxchoices = int(request.GET['maxchoices'])
-      election.save()
+
+    election.maxchoices = int(request.GET['maxchoices'])
+
+    voters = []
+    voters_file = open(str(BASE_DIR.parent) + "/election/" + request.GET['voters'], 'r')
+    voters_file_lines = voters_file.readlines()
+    for line in voters_file_lines:
+      voters.append(line.strip())
+    election.voters = voters
+
+    candidates = []
+    candidates_file = open(str(BASE_DIR.parent) + "/election/" + request.GET['candidates'], 'r')
+    candidates_file_lines = candidates_file.readlines()
+    for line in candidates_file_lines:
+      data = line.split(", ")
+      candidate = {
+        "name": data[0],
+        "username": data[1],
+        "link": data[2],
+      }
+      candidates.append(candidate)
+    election.candidates = candidates
+
+    election.save()
 
   context = { "elections": Election.objects.all() }
   if request.user:

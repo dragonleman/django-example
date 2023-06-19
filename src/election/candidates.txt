@@ -1,5 +1,25 @@
-Banane, banane, https://fr.wikipedia.org/wiki/Banane
-Orange, orange, https://fr.wikipedia.org/wiki/Orange_(fruit)
-Pamplemousse, pamplemousse, https://fr.wikipedia.org/wiki/Pamplemousse_et_pom%C3%A9lo
-Pastèque, pasteque, https://fr.wikipedia.org/wiki/Past%C3%A8que
-Fraise, fraise, https://fr.wikipedia.org/wiki/Fraise
+Volkan Cevher, cevher, https://people.epfl.ch/199128
+Andreas Osterwalder, osterwalder, https://people.epfl.ch/116115
+Franz-Josef Haug, haug, https://people.epfl.ch/190209
+Rolf Gruetter, gruetter, https://people.epfl.ch/161735
+Kumar Varoon Agrawal, agrawal, https://people.epfl.ch/263766
+Marco Cantoni, cantoni, https://people.epfl.ch/120862
+Samuel Dubuis, dubuis, https://people.epfl.ch/183833
+Alain Prenleloup, prenleloup, https://people.epfl.ch/111563
+Li Tang, tang, https://people.epfl.ch/270859
+Olivier Burdet, burdet, https://people.epfl.ch/104671
+Orane Pouchon, pouchon, https://people.epfl.ch/178578
+Anna Carratala Ripolles, ripolles, https://people.epfl.ch/234442
+Anna Neus Igual Muñoz, munoz, https://people.epfl.ch/172629
+Guillaume Anciaux, anciaux, https://people.epfl.ch/182721
+Gautam Maitra, maitra, https://people.epfl.ch/182032
+Jamila Sam, sam, https://people.epfl.ch/106336
+Adélie Garin, garin, https://people.epfl.ch/293509
+Emad Oveisi, oveisi, https://people.epfl.ch/191661
+Adil Koukab, koukab, https://people.epfl.ch/122433 
+Duccio Testa, testa, https://people.epfl.ch/153200
+Lionel Sofia, sofia, https://people.epfl.ch/154702
+Stéphane Joost, joost, https://people.epfl.ch/149002
+Sergi Aguacil Moreno, moreno, https://people.epfl.ch/241268
+Tamara Milosevic, milosevic, https://people.epfl.ch/348024
+Alessio Ferrari, ferrari, https://people.epfl.ch/178175

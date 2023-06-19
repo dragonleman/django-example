@@ -31,7 +31,7 @@ def homepage(request):
     vote.choices = choices
     vote.save()
     template = loader.get_template('thanks.html')
-    context = {"user": request.user, "choices": vote.choices}
+    context = {"user": request.user, "choices": vote.choices, "numberchoices": vote.choices.count(",") + 1}
     return HttpResponse(template.render(context))
 
   context = { "election": election }
@@ -50,7 +50,7 @@ def homepage(request):
 # in case of cheating on the html/script file
 def validate_vote(choices, election):
   chosencandidates = choices.split(",")
-  candidates = election.get_candidates()
+  candidates = election.get_candidates_username()
     
   # check if there is a new cadidate
   check = all(item in candidates for item in chosencandidates)

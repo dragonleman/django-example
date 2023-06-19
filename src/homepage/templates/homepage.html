@@ -1,104 +1,98 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Election CCE</title>
-  {% load bootstrap5 %}
-  {% bootstrap_css %}
-  {% bootstrap_javascript %}
-  <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
-</head>
-<body>
-  <div class="container">
+{% extends 'base.html' %}
 
-    <div class="row justify-content-md-center">
-      <div class="col">
-      </div>
-      <div class="col-8">
-        <h1>{{ user.username }}</h1>
-      </div>
-      <div class="col">
-      </div>
+{% block content %}
+
+<div class="container">
+
+  <div class="row justify-content-md-center">
+    <div class="col">
     </div>
-    
-    <div class="row justify-content-md-center">
-      <div class="col">
-      </div>
-     
-      <div class="col-8">
-        {% if user.is_authenticated and user.is_superuser %}
-        <a href="{% url 'create_election' %}">Create an Election</a>
-        {% endif %}
-      </div>
-      <div class="col">
-        {% if user.is_authenticated %}
-        <a href="{% url 'logout' %}">Logout</a>
-        {% else %}
-        <a href="{% url 'login_view' %}">Login</a>
-        {% endif %}
-      </div>
+    <div class="col-8">
+      <h1>{{ user.username }}</h1>
     </div>
-
-    <div class="row justify-content-md-center">
-      <div class="col">
-      </div>
-
-      <div class="col-8">
-      {% if display_election %}
-        
-        {% if election %}
-        <h1>{{ election.title }}</h1>
-        <p>{{ election.subtitle }}</p>
-
-        <form action="" method="get" id="election_cce">
-          <legend>Choose at most {{ election.maxchoices }} candidates.</legend>
-
-          {% for candidate in election.candidates %}
-          <div class="input-group mb-3">
-            <div class="input-group-text">
-              <input type="checkbox" id="{{ candidate.username }}" name="{{ candidate.username }}">
-            </div>
-            <label for="{{ candidate.username }}">
-              <a target="_blank" href="{{ candidate.link }}">{{ candidate.name }}</a>
-            </label>
-          </div>
-          {% endfor %}
-
-          <div class="input-group mb-3">
-            <div class="input-group-text">
-              <input type="checkbox" id="blank_vote}" name="blank_vote">
-            </div>
-            <label for="{{ candidate.username }}">
-              Blank (if selected, only a blank vote will be recorded)</a>
-            </label>
-          </div>
-        </form>
-
-        <button type="submit" form="election_cce" value="Submit">Submit</button>
-        {% else %}
-        <p>There is no elections</p>
-        {% endif %}
-
+    <div class="col">
+    </div>
+  </div>
+  
+  <div class="row justify-content-md-center">
+    <div class="col">
+    </div>
+   
+    <div class="col-8">
+      {% if user.is_authenticated and user.is_superuser %}
+      <a href="{% url 'create_election' %}">Create an Election</a>
       {% endif %}
-
-      </div>
-      <div class="col">
-      </div>
+    </div>
+    <div class="col">
+      {% if user.is_authenticated %}
+      <a href="{% url 'logout' %}">Logout</a>
+      {% else %}
+      <a href="{% url 'login_view' %}">Login</a>
+      {% endif %}
     </div>
   </div>
 
-  <script>
-  $(document).ready(function () {
-    $("input[type='checkbox']").change(function () {
-      var maxAllowed = {{ election.maxchoices }};
-      var cnt = $("input[type='checkbox']:checked").length;
-      if (cnt > maxAllowed) 
-      {
-         $(this).prop("checked", "");
-         alert('Select maximum ' + maxAllowed + ' choices!');
-      }
-    });
-  });
-  </script> 
+  <div class="row justify-content-md-center">
+    <div class="col">
+    </div>
 
-</body>
-</html>
+    <div class="col-8">
+    {% if display_election %}
+      
+      {% if election %}
+      <h1>{{ election.title }}</h1>
+      <p>{{ election.subtitle }}</p>
+
+      <form action="" method="get" id="election_cce">
+        <legend>Choose at most {{ election.maxchoices }} candidates.</legend>
+
+        {% for candidate in election.get_candidates %}
+        <div class="input-group mb-3">
+          <div class="input-group-text">
+            <input type="checkbox" id="{{ candidate.username }}" name="{{ candidate.username }}">
+          </div>
+          <label for="{{ candidate.username }}">
+            <a target="_blank" href="{{ candidate.link }}">{{ candidate.name }}</a>
+          </label>
+        </div>
+        {% endfor %}
+
+        <div class="input-group mb-3">
+          <div class="input-group-text">
+            <input type="checkbox" id="blank_vote}" name="blank_vote">
+          </div>
+          <label for="{{ candidate.username }}">
+            Blank (if selected, only a blank vote will be recorded)</a>
+          </label>
+        </div>
+      </form>
+
+      <button type="submit" form="election_cce" value="Submit">Submit</button>
+      {% else %}
+      <p>There is no elections</p>
+      {% endif %}
+
+    {% endif %}
+
+    </div>
+    <div class="col">
+    </div>
+  </div>
+</div>
+
+<script>
+$(document).ready(function () {
+  $("input[type='checkbox']").change(function () {
+    var maxAllowed = {{ election.maxchoices }};
+    var cnt = $("input[type='checkbox']:checked").length;
+    if (cnt > maxAllowed) 
+    {
+       $(this).prop("checked", "");
+       alert('Select maximum ' + maxAllowed + ' choices!');
+    }
+  });
+});
+</script>
+
+{% endblock content %}
+

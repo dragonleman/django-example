@@ -1,15 +1,27 @@
-<!DOCTYPE html>
-<html>
-<body>
+{% extends 'base.html' %}
 
-<h1>Thanks {{ user.username }} for your vote</h1>
-<p>Your vote has been successfully recorded.</p>
+{% block content %}
 
-{% if choices|length == 0 %}
-<p>A blank vote has been submitted</p>
-{% else %}
-<p>Your choices: {{ choices }}</p>
-{% endif %}
+<div class="container">
 
-</body>
-</html>
+  <div class="row justify-content-md-center">
+    <div class="col">
+    </div>
+
+    <div class="col-8">
+      <h1>Thanks {{ user.username }} for your vote</h1>
+      <p>Your vote has been successfully recorded.</p>
+
+      {% if choices|length == 0 %}
+      <p>A blank vote has been submitted</p>
+      {% else %}
+      <p>Your choices ({{ numberchoices }}) : {{ choices }}</p>
+      {% endif %}
+    </div>
+
+    <div class="col">
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

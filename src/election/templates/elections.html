@@ -1,42 +1,73 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Liste des élections</title>
-</head>
-<body>
-  <h1>{{ user.username }}</h1>
-  
-  {% if user.is_authenticated and user.is_superuser %}
-  <form action="" method="get" id="election">
-    <label for="name">Title :
-      <input type="text" id="title" name="title" required size="100">
-    </label>
-    <label for="name">Max choices :
-      <input type="text" id="maxchoices" name="maxchoices" required size="5">
-    </label>
-  </form>
-  <button type="submit" form="election" value="Submit">Submit</button>
-  {% endif %}
+{% extends 'base.html' %}
 
+{% block content %}
 
-  <table>
-    <tr>
-      <th>Title</th>
-      <th>Candidates</th>
-      <th>Max choices</th>
-      <th>Voters</th>
-      <th>Organizer</th>
-    </tr>
-    {% for election in elections %}
-    <tr>
-      <td>{{ election.title }}</td>
-      <td>{{ election.candidates|length }}</td>
-      <td>{{ election.maxchoices }}</td>
-      <td>{{ election.voters|length }}</td>
-      <td>{{ election.contact }}</td>
-    </tr>
-    {% endfor %}
-  </table>
+<div class="container">
 
-</body>
-</html>
+  <div class="row justify-content-md-center">
+    <div class="col">
+    </div>
+    
+    <div class="col-8">
+      <h1>{{ user.username }}</h1>
+      
+      {% if user.is_authenticated and user.is_superuser %}
+      <form action="" method="get" id="election">
+        <div class="mb-3 mt-3">
+          <label for="name">Title :
+            <input type="text" id="title" name="title" required size="100">
+          </label>
+        </div>
+        <div class="mb-3 mt-3">
+          <label for="name">Start date :
+            <input type="date" id="startdate" name="startdate" value="2023-06-19" min="2023-01-01" max="2023-12-31" required>
+          </label>
+        </div>
+        <div class="mb-3 mt-3">
+          <label for="name">End date :
+            <input type="date" id="enddate" name="enddate"" value="2023-06-19" min="2023-01-01" max="2023-12-31" required>
+          </label>
+        </div>
+        <div class="mb-3 mt-3">
+          <label for="name">Candidates :
+            <input type="file" id="candidates" name="candidates" required size="5">
+          </label>
+        </div>
+        <div class="mb-3 mt-3">
+          <label for="name">Voters :
+            <input type="file" id="voters" name="voters" required>
+          </label>
+        </div>
+        <div class="mb-3 mt-3">
+          <label for="name">Max choices :
+            <input type="text" id="maxchoices" name="maxchoices" required>
+          </label>
+        </div>
+        <div class="mb-3 mt-3">
+          <label for="name">Contact name :
+            <input type="text" id="contactname" name="contactname" required size="100">
+          </label>
+        </div>
+        <div class="mb-3 mt-3">
+          <label for="name">Contact phone :
+            <input type="text" id="contactphone" name="contactphone" required size="20">
+          </label>
+        </div>
+        <div class="mb-3 mt-3">
+          <label for="name">Contact email :
+            <input type="text" id="contactemail" name="contactemail" required size="50">
+          </label>
+        </div>
+      </form>
+      <button type="submit" form="election" value="Submit">Submit</button>
+      {% endif %}
+    </div>
+
+    <div class="col">
+    </div>
+
+  </div>
+
+</div>
+
+{% endblock content %}
