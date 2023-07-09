@@ -21,14 +21,14 @@ pyenv activate django-example
 Install dependencies
 
 ```
-pip install -r requirements/prod.txt
+pip install -r requirements/local.txt
 ```
 
 Prepare the App
 
 ```
-python src/manage.py makemigrations --settings="config.settings.local"
-python src/manage.py migrate --settings="config.settings.local"
+python src/manage.py makemigrations
+python src/manage.py migrate
 ```
 
 Run
@@ -37,6 +37,6 @@ Run
 Start the server
 
 ```
-python src/manage.py runserver --settings="config.settings.local"
+python src/manage.py runserver
 ```
 
