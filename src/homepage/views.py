@@ -28,11 +28,11 @@ def homepage(request):
                 }
                 return HttpResponse(template.render(context))
 
-      vote.choices = choices
-      vote.save()
-      template = loader.get_template('thanks.html')
-      context = {"user": request.user, "choices": vote.choices, "numberchoices": vote.choices.count(",") + 1}
-      return HttpResponse(template.render(context))
+        vote.choices = choices
+        vote.save()
+        template = loader.get_template('thanks.html')
+        context = {"user": request.user, "choices": vote.choices, "numberchoices": vote.choices.count(",") + 1}
+        return HttpResponse(template.render(context))
 
     context = {"election": election}
     if request.user:

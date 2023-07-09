@@ -38,5 +38,5 @@ class Election(models.Model):
         candidates = self.get_candidates()
         result = []
         for candidate in candidates:
-          result.append(candidate['username'])
+            result.append(candidate['username'])
         return result
