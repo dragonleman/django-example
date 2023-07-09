@@ -11,7 +11,7 @@ def homepage(request):
         vote, created = Vote.objects.get_or_create(voter=request.user.profile.pk)
         choices = ""
 
-        if not "blank_vote" in request.GET:
+        if "blank_vote" not in request.GET:
             for choice in request.GET:
                 choices += str(choice) + ","
             choices = choices[:-1]
