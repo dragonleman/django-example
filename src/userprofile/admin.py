@@ -2,7 +2,7 @@
 (c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, VPSI, 2023
 """
 
-from django.contrib.auth.admin import UserAdmin
+from django.contrib import admin
 from .models import UserProfile
 
 

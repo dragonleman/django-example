@@ -17,7 +17,7 @@ class Election(models.Model):
     """ Election model """
     title = models.CharField(max_length=200, default="")
     maxchoices = models.IntegerField(default=1)
-    
+
     startdate = models.CharField(max_length=50, default=date.today())
     enddate = models.CharField(max_length=50, default=date.today())
 
@@ -28,14 +28,11 @@ class Election(models.Model):
     voters = models.TextField(null=True, blank=True)
     candidates = models.TextField(null=True, blank=True)
 
-
     def get_voters(self):
         return ast.literal_eval(self.voters)
 
-
     def get_candidates(self):
         return ast.literal_eval(self.candidates)
-
 
     def get_candidates_username(self):
         candidates = self.get_candidates()
