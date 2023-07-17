@@ -20,3 +20,9 @@ Copyright
 ---------
 
 (c) All rights reserved. ECOLE POLYTECHNIQUE FEDERALE DE LAUSANNE, Switzerland, SI, 2023
+
+[github-actions-image]: https://github.com/dragonleman/django-example/workflows/Build/badge.svg?branch=main
+[github-actions-url]: https://github.com/dragonleman/django-example/actions
+
+[codecov-image]:https://codecov.io/gh/dragonleman/django-example/branch/main/graph/badge.svg
+[codecov-url]:https://codecov.io/gh/dragonleman/django-example
